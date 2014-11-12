@@ -14,6 +14,7 @@
 		8C1BB0E61A11EDBB00BBD28D /* BNRItemsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C1BB0E51A11EDBB00BBD28D /* BNRItemsViewController.m */; };
 		8C1BB0E91A11EF9E00BBD28D /* BNRItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C1BB0E81A11EF9E00BBD28D /* BNRItem.m */; };
 		8C1BB0EC1A11F0E300BBD28D /* BNRItemStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C1BB0EB1A11F0E300BBD28D /* BNRItemStore.m */; };
+		8CC097181A134391001C73EA /* HeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CC097171A134391001C73EA /* HeaderView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,6 +43,7 @@
 		8C1BB0E81A11EF9E00BBD28D /* BNRItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BNRItem.m; sourceTree = "<group>"; };
 		8C1BB0EA1A11F0E300BBD28D /* BNRItemStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BNRItemStore.h; sourceTree = "<group>"; };
 		8C1BB0EB1A11F0E300BBD28D /* BNRItemStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BNRItemStore.m; sourceTree = "<group>"; };
+		8CC097171A134391001C73EA /* HeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HeaderView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +91,7 @@
 				8C1BB0BE1A11ED4B00BBD28D /* Supporting Files */,
 				8C1BB0E41A11EDBB00BBD28D /* BNRItemsViewController.h */,
 				8C1BB0E51A11EDBB00BBD28D /* BNRItemsViewController.m */,
+				8CC097171A134391001C73EA /* HeaderView.xib */,
 				8C1BB0E71A11EF9E00BBD28D /* BNRItem.h */,
 				8C1BB0E81A11EF9E00BBD28D /* BNRItem.m */,
 				8C1BB0EA1A11F0E300BBD28D /* BNRItemStore.h */,
@@ -204,6 +207,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8C1BB0CC1A11ED4B00BBD28D /* Images.xcassets in Resources */,
+				8CC097181A134391001C73EA /* HeaderView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -328,7 +332,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CLANG_ENABLE_OBJC_ARC = NO;
+				CLANG_ENABLE_OBJC_ARC = YES;
 				INFOPLIST_FILE = Homepwner/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -339,7 +343,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CLANG_ENABLE_OBJC_ARC = NO;
+				CLANG_ENABLE_OBJC_ARC = YES;
 				INFOPLIST_FILE = Homepwner/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -399,6 +403,7 @@
 				8C1BB0E01A11ED4B00BBD28D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		8C1BB0E11A11ED4B00BBD28D /* Build configuration list for PBXNativeTarget "HomepwnerTests" */ = {
 			isa = XCConfigurationList;
@@ -407,6 +412,7 @@
 				8C1BB0E31A11ED4B00BBD28D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

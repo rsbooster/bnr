@@ -47,7 +47,7 @@
 {
     NSInteger itemNumber = [self.privateItems count] + 1;
     NSString *info = [NSString stringWithFormat:@"Item %d", itemNumber];
-    BNRItem *item = [[[BNRItem alloc] initWithInfo:info andPrice:itemNumber * 10] autorelease];
+    BNRItem *item = [[BNRItem alloc] initWithInfo:info andPrice:itemNumber * 10];
     [self.privateItems addObject:item];
     return item;
 }
