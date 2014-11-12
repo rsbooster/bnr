@@ -52,6 +52,11 @@
     return item;
 }
 
+-(void)removeItem:(BNRItem *)item
+{
+    [_privateItems removeObjectIdenticalTo:item];
+}
+
 -(BNRItem *)itemInSection:(NSInteger)section withIndex:(NSInteger)index
 {
     for (BNRItem *item in self.allItems)
@@ -82,6 +87,15 @@
 -(NSInteger)sectionForItem:(BNRItem *)item
 {
     return 0;
+}
+
+-(void)moveItemAtIndex:(NSUInteger)fromIndex toIndex:(NSUInteger)toIndex
+{
+    if (fromIndex == toIndex)
+        return;
+    BNRItem *item = _privateItems[fromIndex];
+    [_privateItems removeObjectAtIndex:fromIndex];
+    [_privateItems insertObject:item atIndex:toIndex];
 }
 
 @end

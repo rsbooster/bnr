@@ -24,7 +24,7 @@
     self = [super initWithStyle:UITableViewStyleGrouped];
     if (self)
     {
-        for (int i=0; i<20; i++)
+        for (int i=0; i<5; i++)
         {
             [[BNRItemStore sharedStore] createItem];
         }
@@ -59,7 +59,10 @@
 
 - (IBAction)addNewItem:(id)sender
 {
-    
+    BNRItem *newItem = [[BNRItemStore sharedStore] createItem];
+    NSInteger lastRow = [[[BNRItemStore sharedStore] allItems] indexOfObject:newItem];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:lastRow inSection:0];
+    [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationTop];
 }
 
 - (IBAction)toggleEditingMode:(id)sender
@@ -91,6 +94,29 @@
     BNRItem *item = [[BNRItemStore sharedStore] itemInSection:indexPath.section withIndex:indexPath.row];
     cell.textLabel.text = [NSString stringWithFormat:@"%@, $%d", item.info, item.price];
     return cell;
+}
+
+-(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if(editingStyle == UITableViewCellEditingStyleDelete)
+    {
+        NSArray *allItems = [[BNRItemStore sharedStore] allItems];
+        BNRItem *item = allItems[indexPath.row];
+        [[BNRItemStore sharedStore] removeItem:item];
+        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+    }
+}
+
+-(void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath
+{
+    [[BNRItemStore sharedStore] moveItemAtIndex:sourceIndexPath.row toIndex:destinationIndexPath.row];
+}
+
+#pragma mark - UITableViewDelegate
+
+-(NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return @"Remove";
 }
 
 @end
