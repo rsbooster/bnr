@@ -7,8 +7,10 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BNRDetailViewController">
             <connections>
                 <outlet property="dateLabel" destination="9yO-IP-1c4" id="Lbp-7i-S2h"/>
+                <outlet property="imageView" destination="sgn-LZ-pBL" id="Re7-xq-te1"/>
                 <outlet property="nameField" destination="HUc-4M-Bmp" id="GJI-ih-wFz"/>
                 <outlet property="serialNumberField" destination="axb-RL-gy5" id="f4O-GK-wms"/>
+                <outlet property="toolbar" destination="SwC-31-iFk" id="aNp-hU-shg"/>
                 <outlet property="valueFileld" destination="Etf-pd-fzt" id="Xn1-e7-2M5"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -40,16 +42,25 @@
                     <rect key="frame" x="62" y="79" width="250" height="30"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="Okm-t5-clX"/>
+                    </connections>
                 </textField>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="axb-RL-gy5">
                     <rect key="frame" x="62" y="117" width="250" height="30"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="DBI-3u-Ksb"/>
+                    </connections>
                 </textField>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Etf-pd-fzt">
                     <rect key="frame" x="62" y="155" width="250" height="30"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="done"/>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="ycQ-Ia-ZcD"/>
+                    </connections>
                 </textField>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Value" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Nq-Ru-yWg">
                     <rect key="frame" x="8" y="159" width="42" height="21"/>
@@ -57,6 +68,19 @@
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sgn-LZ-pBL">
+                    <rect key="frame" x="8" y="222" width="304" height="192"/>
+                </imageView>
+                <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SwC-31-iFk">
+                    <rect key="frame" x="0.0" y="436" width="320" height="44"/>
+                    <items>
+                        <barButtonItem systemItem="camera" id="tsl-R1-4a2">
+                            <connections>
+                                <action selector="takePicture:" destination="-1" id="Yes-yb-WAX"/>
+                            </connections>
+                        </barButtonItem>
+                    </items>
+                </toolbar>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>

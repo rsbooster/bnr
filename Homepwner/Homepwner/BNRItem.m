@@ -22,6 +22,8 @@
         self.serialNumber = [uuid UUIDString];
         
         self.dateCreated = [NSDate date];
+        
+        self.itemKey = [uuid UUIDString];
     }
     return self;
 }

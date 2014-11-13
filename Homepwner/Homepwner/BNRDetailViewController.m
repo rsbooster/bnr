@@ -7,6 +7,7 @@
 //
 
 #import "BNRDetailViewController.h"
+#import "BNRImageStore.h"
 #import "BNRItem.h"
 
 @interface BNRDetailViewController ()
@@ -15,6 +16,8 @@
 @property (weak, nonatomic) IBOutlet UITextField *serialNumberField;
 @property (weak, nonatomic) IBOutlet UITextField *valueFileld;
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *imageView;
+@property (weak, nonatomic) IBOutlet UIToolbar *toolbar;
 
 @end
 
@@ -26,9 +29,17 @@
     self.navigationItem.title = item.info;
 }
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+    
+    UIBarButtonItem *barItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemTrash target:self action:@selector(deletePicture:)];
+    
+    NSMutableArray *items = [self.toolbar.items mutableCopy];
+    [items addObject:barItem];
+    
+    [self.toolbar setItems:items animated:NO];
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -54,6 +65,8 @@
         dateFormatter.timeStyle = NSDateIntervalFormatterNoStyle;
     }
     self.dateLabel.text = [dateFormatter stringFromDate:item.dateCreated];
+    
+    self.imageView.image = [[BNRImageStore sharedStore] imageForKey:item.itemKey];
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -76,14 +89,49 @@
     [self.view endEditing:YES];
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (IBAction)takePicture:(id)sender
+{
+    UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
+    if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
+    {
+        imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+    }
+    else
+    {
+        imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    }
+    imagePicker.allowsEditing = YES;
+    imagePicker.delegate = self;
+    [self presentViewController:imagePicker animated:YES completion:nil];
 }
-*/
+
+-(void)deletePicture:(id)sender
+{
+    if(!self.imageView.image)
+        return;
+    
+    self.imageView.image = nil;
+    [[BNRImageStore sharedStore] deleteImageForKey:self.item.itemKey];
+}
+
+#pragma mark - UIImagePickerControllerDelegate
+
+-(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+    UIImage *image = info[UIImagePickerControllerEditedImage];
+    self.imageView.image = image;
+    
+    [[BNRImageStore sharedStore] setImage:image forKey:self.item.itemKey];
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark - UITextFieldDelegate
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    return YES;
+}
 
 @end

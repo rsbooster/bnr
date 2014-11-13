@@ -14,6 +14,7 @@
 @property (nonatomic, copy) NSString *serialNumber;
 @property (nonatomic, assign) NSInteger price;
 @property (nonatomic, strong) NSDate *dateCreated;
+@property (nonatomic, copy) NSString *itemKey;
 
 -(instancetype)initWithInfo:(NSString*)info andPrice:(NSInteger)price;
 
