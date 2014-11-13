@@ -11,7 +11,9 @@
 @interface BNRItem : NSObject
 
 @property (nonatomic, copy) NSString *info;
+@property (nonatomic, copy) NSString *serialNumber;
 @property (nonatomic, assign) NSInteger price;
+@property (nonatomic, strong) NSDate *dateCreated;
 
 -(instancetype)initWithInfo:(NSString*)info andPrice:(NSInteger)price;
 

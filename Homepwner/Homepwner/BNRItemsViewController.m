@@ -13,8 +13,6 @@
 
 @interface BNRItemsViewController ()
 
-@property (nonatomic, strong) IBOutlet UIView *headerView;
-
 @end
 
 
@@ -22,13 +20,20 @@
 
 - (instancetype)init
 {
-    self = [super initWithStyle:UITableViewStyleGrouped];
+    self = [super initWithStyle:UITableViewStylePlain];
     if (self)
     {
         for (int i=0; i<5; i++)
         {
             [[BNRItemStore sharedStore] createItem];
         }
+        UINavigationItem *navItem = self.navigationItem;
+        navItem.title = @"Homepwner";
+        UIBarButtonItem *barButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
+                                                                                   target:self
+                                                                                   action:@selector(addNewItem:)];
+        navItem.rightBarButtonItem = barButton;
+        navItem.leftBarButtonItem = self.editButtonItem;
     }
     return self;
 }
@@ -43,20 +48,16 @@
     [super viewDidLoad];
     
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"UITableViewCell"];
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:YES];
     
-    self.tableView.tableHeaderView = self.headerView;
+    [self.tableView reloadData];
 }
 
 #pragma mark - Actions and Outlets
-
-- (UIView *)headerView
-{
-    if(!_headerView)
-    {
-        [[NSBundle mainBundle] loadNibNamed:@"HeaderView" owner:self options:nil];
-    }
-    return _headerView;
-}
 
 - (IBAction)addNewItem:(id)sender
 {
@@ -64,20 +65,6 @@
     NSInteger lastRow = [[[BNRItemStore sharedStore] allItems] indexOfObject:newItem];
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:lastRow inSection:0];
     [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationTop];
-}
-
-- (IBAction)toggleEditingMode:(id)sender
-{
-    if (self.isEditing)
-    {
-        [sender setTitle:@"Edit" forState:UIControlStateNormal];
-        [self setEditing:NO animated:YES];
-    }
-    else
-    {
-        [sender setTitle:@"Done" forState:UIControlStateNormal];
-        [self setEditing:YES animated:YES];
-    }
 }
 
 #pragma mark - UITableViewDataSource
@@ -122,7 +109,9 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    BNRItem *item = [[BNRItemStore sharedStore] itemInSection:indexPath.section withIndex:indexPath.row];
     BNRDetailViewController *detailController = [[BNRDetailViewController alloc] init];
+    detailController.item = item;
     [self.navigationController pushViewController:detailController animated:YES];
 }
 

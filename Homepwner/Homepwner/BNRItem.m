@@ -17,6 +17,11 @@
     {
         self.info = info;
         self.price = price;
+        
+        NSUUID *uuid = [[NSUUID alloc] init];
+        self.serialNumber = [uuid UUIDString];
+        
+        self.dateCreated = [NSDate date];
     }
     return self;
 }
